@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Prayasi ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* intro screen */
+.screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 25px;
+    border: none;
+    background: #ff4e78;
+    color: white;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#noBtn {
+    position: absolute;
+}
+
+.hidden {
+    display: none;
+    margin-top: 20px;
+}
+
+#text {
+    border-right: 2px solid white;
+    display: inline-block;
+    padding-right: 5px;
+    max-width: 600px;
+}
+
+img {
+    width: 260px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.heart {
+    position: fixed;
+    color: pink;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% {transform: translateY(100vh);}
+    100% {transform: translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- 💖 INTRO -->
+<div id="intro" class="screen">
+    <h2>Prayasi… do you love me? ❤️</h2>
+
+    <button onclick="start()">Yes 💖</button>
+    <button id="noBtn" onmouseover="moveNo()">No 😜</button>
+</div>
+
+<!-- 💌 MAIN CONTENT -->
+<div id="main" class="hidden">
+
+    <h1>Hey Prayasi 💖</h1>
+    <h3 id="countdown"></h3>
+
+    <p id="text"></p>
+
+    <div id="photos" class="hidden">
+        <img id="slide" src="photo1.jpg">
+    </div>
+
+    <br>
+    <button onclick="showFinal()">Continue ❤️</button>
+
+    <div id="final" class="hidden">
+        <h2>Happy Birthday Prayasi 🎉</h2>
+
+        <p>
+        2 years with you feels like both a moment and a lifetime 💖<br><br>
+
+        We’ve created so many memories together…<br>
+        I will never forget them, no matter what happens ahead.<br><br>
+
+        You take care of me like I’m a little kid…<br>
+        and I honestly love that feeling ❤️<br><br>
+
+        Even if life changes someday…<br>
+        your memories will always stay with me 💫<br><br>
+
+        Today is only about celebrating YOU 🎂
+        </p>
+    </div>
+
+</div>
+
+<!-- 🎶 YOUTUBE SONG -->
+<iframe 
+    id="music"
+    width="0"
+    height="0"
+    src="https://www.youtube.com/embed/fSsCXyDf2vc?autoplay=1&loop=1&playlist=fSsCXyDf2vc"
+    frameborder="0"
+    allow="autoplay"
+    allowfullscreen>
+</iframe>
+
+<script>
+
+/* 💖 move NO button */
+function moveNo() {
+    let btn = document.getElementById("noBtn");
+    btn.style.top = Math.random() * 80 + "%";
+    btn.style.left = Math.random() * 80 + "%";
+}
+
+/* 🚀 start */
+function start() {
+    document.getElementById("intro").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    typeText();
+}
+
+/* ⏳ countdown */
+let birthday = new Date("May 14, 2026").getTime();
+
+setInterval(() => {
+    let now = new Date().getTime();
+    let diff = birthday - now;
+
+    if(diff > 0){
+        let d = Math.floor(diff / (1000*60*60*24));
+        document.getElementById("countdown").innerHTML =
+        "Something special in " + d + " days ❤️";
+    } else {
+        document.getElementById("countdown").innerHTML =
+        "It's your day 💖";
+    }
+}, 1000);
+
+/* ✍ typing message */
+let message = `Hey Prayasi...
+
+2 years with you feels like both a moment and a lifetime.
+
+We’ve created so many beautiful memories together…
+
+And I just want you to feel how special you are to me ❤️`;
+
+let i = 0;
+
+function typeText() {
+    if(i < message.length){
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 40);
+    } else {
+        document.getElementById("photos").style.display = "block";
+    }
+}
+
+/* 📸 slideshow */
+let images = ["photo1.jpg","photo2.jpg","photo3.jpg","photo4.jpg"];
+let index = 0;
+
+setInterval(() => {
+    index = (index + 1) % images.length;
+    document.getElementById("slide").src = images[index];
+}, 2000);
+
+/* 🎉 final */
+function showFinal() {
+    document.getElementById("final").style.display = "block";
+}
+
+/* 💖 hearts */
+setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random()*20 + 15) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
+
+</script>
+
+</body>
+</html>
